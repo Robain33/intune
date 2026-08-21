@@ -1,9 +1,6 @@
-docker exec -it python-api pip install requests --break-system-packages
+nano ~/ai-server/python_scripts/Soti/"0.collector agents"/"2.Monitor agent"/soti_monitor_agent_test.py
 
-docker exec -it python-api python3 "/scripts/Soti/0.collector agents/2.Monitor agent/soti_monitor_agent_test.py"
-
-docker exec -it python-api python3 "/scripts/Soti/0.collector agents/2.Monitor agent/soti_monitor_agent_test.py"
-
-docker exec -it python-api grep -n "servers.json\|clientId\|client_id\|password\|username\|serverUrl\|server_url" "/scripts/Soti/0.collector agents/2.Monitor agent/soti_monitor_agent_test.py"
-
-docker exec -it python-api grep -n "servers.json\|clientId\|client_id\|password\|username\|serverUrl\|server_url" "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py"
+"grant_type": "password",
+"username": server["username"],
+"password": server["password"],
+"client_id": server["clientId"],
