@@ -1,6 +1,12 @@
-nano ~/ai-server/python_scripts/Soti/"0.collector agents"/"2.Monitor agent"/soti_monitor_agent_test.py
+nano ~/Desktop/soti-dashboard.desktop
 
-"grant_type": "password",
-"username": server["username"],
-"password": server["password"],
-"client_id": server["clientId"],
+[Desktop Entry]
+Type=Application
+Name=SOTI Dashboard
+Comment=Launch SOTI MobiControl monitoring dashboard
+Exec=x-terminal-emulator -e bash -c 'cd "/home/mdm/Desktop/soti/endofthedayfiles2703" && python3 soti_server.py; exec bash'
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;
+
+chmod +x ~/Desktop/soti-dashboard.desktop
