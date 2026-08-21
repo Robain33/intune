@@ -1,1 +1,3 @@
 docker exec -it python-api pip install requests --break-system-packages
+
+docker exec -it python-api python3 "/scripts/Soti/0.collector agents/2.Monitor agent/soti_monitor_agent_test.py"
