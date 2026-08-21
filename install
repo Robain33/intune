@@ -1,16 +1,1 @@
-docker exec -it python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py"
-
-mkdir -p ~/ai-server/python_scripts/Soti/logs
-
-0 6 * * * docker exec python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/health_cron.log 2>&1
-
-15 6 * * * docker exec python-api python3 "/scripts/Soti/0.collector agents/0.Daily export/soti_daily_export.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/export_cron.log 2>&1
-
-*/30 * * * * docker exec python-api python3 "/scripts/Soti/0.collector agents/2.Monitor agent/soti_monitor_agent_test.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/monitor_cron.log 2>&1
-
-25 10 * * * docker exec python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log 2>&1
-
-cat ~/ai-server/python_scripts/Soti/logs/test_cron.log
-
-docker exec python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log 2>&1
-cat /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log
+docker exec -it python-api pip install requests --break-system-packages
