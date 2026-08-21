@@ -11,3 +11,6 @@ mkdir -p ~/ai-server/python_scripts/Soti/logs
 25 10 * * * docker exec python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log 2>&1
 
 cat ~/ai-server/python_scripts/Soti/logs/test_cron.log
+
+docker exec python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py" >> /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log 2>&1
+cat /home/mdm/ai-server/python_scripts/Soti/logs/test_cron.log
