@@ -1,1 +1,6 @@
-docker exec -it python-api python3 "/scripts/0.collector agents/1.Health collector/health_collector.py"
+cd ~/ai-server/python_scripts/Soti
+
+ln -s ../servers.json "0.collector agents/0.Daily export/servers.json"
+ln -s ../servers.json "0.collector agents/1.Health collector/servers.json"
+ln -s ../servers.json "0.collector agents/2.Monitor agent/servers.json"
+
