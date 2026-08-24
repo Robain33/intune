@@ -1,2 +1,3 @@
 cd ~/ai-server/python_scripts/Soti/"0.collector agents"/"0.Daily export"
 ln -s servers.json soti_config.json
+sed -i '1s/^\xEF\xBB\xBF//' ~/ai-server/python_scripts/Soti/servers.json
