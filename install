@@ -1,12 +1,1 @@
-nano ~/Desktop/soti-dashboard.desktop
-
-[Desktop Entry]
-Type=Application
-Name=SOTI Dashboard
-Comment=Launch SOTI MobiControl monitoring dashboard
-Exec=x-terminal-emulator -e bash -c 'cd "/home/mdm/Desktop/soti/endofthedayfiles2703" && python3 soti_server.py; exec bash'
-Icon=utilities-terminal
-Terminal=false
-Categories=Utility;
-
-chmod +x ~/Desktop/soti-dashboard.desktop
+Exec=x-terminal-emulator -e bash -c 'cd "/home/mdm/Desktop/soti/endofthedayfiles2703" && python3 soti_server.py & sleep 2 && xdg-open http://localhost:5000; wait'
