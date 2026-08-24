@@ -1,2 +1,29 @@
 docker exec -it python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py"
 docker exec -it python-api python3 "/scripts/Soti/0.collector agents/1.Health collector/health_collector.py"
+
+
+
+Help me get this prebuilt stack running on the laptop (fill in .env, deploy)
+Let me read the actual .env.template and the deployment docs so I give you exact steps that match this repo — not generic ones.
+
+
+Ran 6 commands, read a file · 3 notes
+Ran 6 commands, read a file · 3 notes
+I read the actual repo files and wrote you a deployment guide tailored to this repo and your Xubuntu laptop — not generic steps. Here's the short version of what to do:
+
+The 5 steps:
+
+Create a folder ~/soti-demo, put compose.yml and .env.template in it (that's all you need — images pull from Docker Hub).
+cp .env.template .env and fill in the MobiControl block with your demo credentials — same Client ID / Secret / username / password your soti_daily_export.py already uses. Set TIMEZONE=Europe/Brussels. Pick an n8n password.
+docker compose up -d then docker compose ps.
+Open n8n at localhost:5678, build a Chat Trigger → AI Agent → MCP Client Tool flow.
+Ask "give me a fleet health overview."
+The four gotchas that will trip you up (all from the repo's own troubleshooting):
+
+The MC container will show "(unhealthy)" — that's a false alarm. The healthcheck pings the wrong path. The curl in the guide proves it's actually fine.
+In the n8n MCP tool, the endpoint is http://soti-mc-mcp:3000/mcp — the container name and internal port 3000, not localhost:4002. This is the #1 thing people get wrong.
+Set the AI Agent's Max Tokens to 2048. n8n defaults to 65536 which causes 402 errors.
+Give the agent the system prompt in the guide, or it'll keep asking "which project?" and claim there are no devices.
+For your offline goal specifically: use your local Ollama as the chat model (Option A in the guide), not OpenRouter. One catch — you need to add extra_hosts: ["host.docker.internal:host-gateway"] to the n8n service so the container can reach Ollama on the host, and you must use a tool-calling capable model like qwen2.5:14b — the llama3.2:1b from your original install guide won't reliably call tools.
+
+Want me to write the exact modified compose.yml with the Ollama extra_hosts fix and XSight commented out, so you can just drop it in?
