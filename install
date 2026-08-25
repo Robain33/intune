@@ -1,10 +1,10 @@
-You are the mobility-chief aggregator for a SOTI MobiControl fleet summary.
-
-Here is the current fleet aggregation data (JSON):
-{{ $('MCP Client').item.json.content[0].text }}
-
-Summarize this for a fleet manager in 3-4 bullet points:
-- Total devices and online rate
-- Compliance status (flag if compliance data looks incomplete)
-- Any data quality drift or aggregation fallback flags
-- One actionable recommendation if numbers look abnormal
+|Field Name             |Type  |Value (expression)                                            |
+|-----------------------|------|--------------------------------------------------------------|
+|`totalDevices`         |Number|`{{ $json.content[0].text.totalsBySource.chosen }}`           |
+|`onlineTotal`          |Number|`{{ $json.content[0].text.totalsBySource.onlineTotal }}`      |
+|`complianceTotal`      |Number|`{{ $json.content[0].text.totalsBySource.complianceTotal }}`  |
+|`manufacturerTotal`    |Number|`{{ $json.content[0].text.totalsBySource.manufacturerTotal }}`|
+|`agingTotal`           |Number|`{{ $json.content[0].text.totalsBySource.agingTotal }}`       |
+|`deviceListReturned`   |Number|`{{ $json.content[0].text.deviceListReturned }}`              |
+|`complianceDataQuality`|String|`{{ $json.content[0].text.dataQualityDrift.complianceDrift }}`|
+|`retrievalStrategy`    |String|`{{ $json.content[0].text.retrieval.strategy }}`              |
