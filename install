@@ -1,9 +1,4 @@
-# Put it next to your existing script
-cp soti_export_api.py /home/mdm/ai-server/n8n_data/
-
 pip3 install flask --break-system-packages
-cd /home/mdm/ai-server/n8n_data
-python3 soti_export_api.py
-
+python3 /home/mdm/ai-server/n8n_data/soti_export_service.py
 
 curl http://localhost:5001/summary
