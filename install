@@ -1,5 +1,9 @@
-N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false
-docker inspect n8n --format='{{json .Config}}' > n8n_config_backup.json
-docker inspect n8n --format='{{json .HostConfig}}' > n8n_hostconfig_backup.json
-cat n8n_config_backup.json
-cat n8n_hostconfig_backup.json
+# Put it next to your existing script
+cp soti_export_api.py /home/mdm/ai-server/n8n_data/
+
+pip3 install flask --break-system-packages
+cd /home/mdm/ai-server/n8n_data
+python3 soti_export_api.py
+
+
+curl http://localhost:5001/summary
