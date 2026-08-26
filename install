@@ -1,2 +1,4 @@
 python3 /home/mdm/ai-server/n8n_data/soti_daily_export.py
 ls -la /home/mdm/ai-server/n8n_data/
+
+N8N_RESTRICT_FILE_ACCESS_TO=/home/node/.n8n
