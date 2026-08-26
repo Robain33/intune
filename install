@@ -1,10 +1,2 @@
-|Field Name             |Type  |Value (expression)                                            |
-|-----------------------|------|--------------------------------------------------------------|
-|`totalDevices`         |Number|`{{ $json.content[0].text.totalsBySource.chosen }}`           |
-|`onlineTotal`          |Number|`{{ $json.content[0].text.totalsBySource.onlineTotal }}`      |
-|`complianceTotal`      |Number|`{{ $json.content[0].text.totalsBySource.complianceTotal }}`  |
-|`manufacturerTotal`    |Number|`{{ $json.content[0].text.totalsBySource.manufacturerTotal }}`|
-|`agingTotal`           |Number|`{{ $json.content[0].text.totalsBySource.agingTotal }}`       |
-|`deviceListReturned`   |Number|`{{ $json.content[0].text.deviceListReturned }}`              |
-|`complianceDataQuality`|String|`{{ $json.content[0].text.dataQualityDrift.complianceDrift }}`|
-|`retrievalStrategy`    |String|`{{ $json.content[0].text.retrieval.strategy }}`              |
+python3 /home/mdm/ai-server/n8n_data/soti_daily_export.py
+ls -la /home/mdm/ai-server/n8n_data/
