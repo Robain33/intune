@@ -1,14 +1,19 @@
-You are the mobility-chief aggregator for a SOTI MobiControl fleet.
+nohup python3 /home/mdm/ai-server/n8n_data/soti_export_service.py > /home/mdm/soti_service.log 2>&1 &
 
-{{ $json.count }} devices in the Zetesdemo environment:
+sudo nano /etc/systemd/system/soti-export.service
+[Unit]
+Description=SOTI Export JSON Service
+After=network.target
 
-{{ $json.deviceTable }}
+[Service]
+User=mdm
+WorkingDirectory=/home/mdm/ai-server/n8n_data
+ExecStart=/usr/bin/python3 /home/mdm/ai-server/n8n_data/soti_export_service.py
+Restart=always
 
-Give a manager 4-5 bullets:
-- Overall health (online/offline, stale devices)
-- OS version and agent version fragmentation — list the actual versions present
-- Devices needing attention (low battery, high memory, long-stale) — name them
-- Hardware mix
-- Top action item
+[Install]
+WantedBy=multi-user.target
 
-Use real device names and numbers from the data above. No placeholders.
+sudo systemctl daemon-reload
+sudo systemctl enable --now soti-export
+sudo systemctl status soti-export
