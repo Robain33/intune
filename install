@@ -1,4 +1,14 @@
-pip3 install flask --break-system-packages
-python3 /home/mdm/ai-server/n8n_data/soti_export_service.py
+You are the mobility-chief aggregator for a SOTI MobiControl fleet.
 
-curl http://localhost:5001/summary
+{{ $json.count }} devices in the Zetesdemo environment:
+
+{{ $json.deviceTable }}
+
+Give a manager 4-5 bullets:
+- Overall health (online/offline, stale devices)
+- OS version and agent version fragmentation — list the actual versions present
+- Devices needing attention (low battery, high memory, long-stale) — name them
+- Hardware mix
+- Top action item
+
+Use real device names and numbers from the data above. No placeholders.
