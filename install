@@ -29,3 +29,5 @@ cd ~/soti-mcp && sed -i 's|^\( *\)if \[ ! -f "\$SECRET_FILE" \]; then|\1if ! sud
 sudo cp ~/etc/soti-agent/zetesdemo.secret /etc/soti-agent/zetesdemo.secret && sudo sed -i 's/\r$//' /etc/soti-agent/zetesdemo.secret && sudo chmod 600 /etc/soti-agent/zetesdemo.secret
 
 sudo sh -c 'n=0; for k in SOTI_CLIENT_ID SOTI_CLIENT_SECRET SOTI_USERNAME SOTI_PASSWORD; do v=$(grep -E "^$k=" /etc/soti-agent/zetesdemo.secret | head -n1 | cut -d= -f2-); [ -n "$v" ] && { echo "  $k OK (${#v} chars)"; n=$((n+1)); } || echo "  $k EMPTY"; done; echo "  $n/4 ready"'
+
+./close-c1-c2.sh up && ./close-c1-c2.sh verify
