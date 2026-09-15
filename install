@@ -1,3 +1,23 @@
-journalctl -u soti-export -n 50 --no-pager
+cd ~ && tar xzf soti-mcp-deploy.tar.gz && cd soti-mcp && ls -la
 
-Environment="PYTHONPATH=/home/mdm/.local/lib/python3.12/site-packages"
+
+./bootstrap.sh
+
+./close-c1-c2.sh inventory
+
+
+./close-c1-c2.sh stop --confirm
+
+./close-c1-c2.sh up
+
+
+./close-c1-c2.sh verify
+
+
+docker pull python:3.12-slim && docker inspect --format='{{index .RepoDigests 0}}' python:3.12-slim
+
+
+sudo usermod -aG docker $USER
+
+
+sudo apt install docker-compose-plugin
