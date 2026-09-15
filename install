@@ -20,13 +20,20 @@ docker pull python:3.12-slim && docker inspect --format='{{index .RepoDigests 0}
 sudo usermod -aG docker $USER
 
 
-sudo apt install docker-compose-plugin
+cd /home/mdm/test/soti/endofthedayfiles2703 && ls -la servers*.json 2>/dev/null; echo "--- building clean config ---"; sudo sh -c 'grep -E "^SOTI_(CLIENT_ID|CLIENT_SECRET|USERNAME|PASSWORD)=" /etc/soti-agent/zetesdemo.secret' | sed 's/^SOTI_/SOTI_ZETESDEMO_/' > /tmp/zd.env && install -d -m 700 ~/.soti-agent && install -m 600 /tmp/zd.env ~/.soti-agent/secrets.env && shred -u /tmp/zd.env && cat > servers.json <<'EOF'
+[
+  {
+    "name": "Zetesdemo",
+    "serverUrl": "https://a0017371.mobicontrol.cloud",
+    "clientId": "${env:SOTI_ZETESDEMO_CLIENT_ID}",
+    "clientSecret": "${env:SOTI_ZETESDEMO_CLIENT_SECRET}",
+    "username": "${env:SOTI_ZETESDEMO_USERNAME}",
+    "password": "${env:SOTI_ZETESDEMO_PASSWORD}",
+    "consoleUrl": "https://a0017371.mobicontrol.cloud/MobiControl/WebConsole"
+  }
+]
+EOF
+echo "--- result ---"; ls -l servers.json ~/.soti-agent/secrets.env; echo "keys:"; grep -oE '^[A-Z_]+' ~/.soti-agent/secrets.env
 
 
-cp /media/mdm/*/soti_server.py /media/mdm/*/migrate_secrets.py /home/mdm/test/soti/endofthedayfiles2703/
-
-
-cd /home/mdm/test/soti/endofthedayfiles2703 && ls -l soti_server.py && grep -c _resolve_env_refs soti_server.py
-
-
-cd /home/mdm/test/soti/endofthedayfiles2703 && python3 migrate_secrets.py --check --file servers.json
+cd /home/mdm/test/soti/endofthedayfiles2703 && python3 soti_server.py
