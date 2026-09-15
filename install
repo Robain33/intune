@@ -23,11 +23,10 @@ sudo usermod -aG docker $USER
 sudo apt install docker-compose-plugin
 
 
-cd /home/mdm/test/soti/endofthedayfiles2703 && ls -la && echo "--- patched? ---" && grep -c 'env:' soti_server.py 2>/dev/null || echo "soti_server.py NOT HERE" && echo "--- credentials ---" && python3 -c "
-import json,glob
-for f in glob.glob('servers*.json'):
-    try: d=json.load(open(f))
-    except Exception as e: print(f'  {f}: unreadable'); continue
-    if isinstance(d,dict): d=[d]
-    live=sum(1 for s in d if isinstance(s,dict) for k in ('clientSecret','password','staticToken') if s.get(k) and not str(s[k]).startswith('\${env:'))
-    print(f'  {f}: {len(d)} env(s), {live} cleartext secret(s)')" && echo "--- MCP container ---" && docker ps --filter label=com.docker.compose.project=soti-zetesdemo --format 'table {{.Names}}\t{{.Status}}'
+cp /media/mdm/*/soti_server.py /media/mdm/*/migrate_secrets.py /home/mdm/test/soti/endofthedayfiles2703/
+
+
+cd /home/mdm/test/soti/endofthedayfiles2703 && ls -l soti_server.py && grep -c _resolve_env_refs soti_server.py
+
+
+cd /home/mdm/test/soti/endofthedayfiles2703 && python3 migrate_secrets.py --check --file servers.json
