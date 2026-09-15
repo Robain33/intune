@@ -21,3 +21,7 @@ sudo usermod -aG docker $USER
 
 
 sudo apt install docker-compose-plugin
+
+
+
+https://a0017371.mobicontrol.cloud
