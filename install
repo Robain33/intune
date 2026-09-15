@@ -23,11 +23,9 @@ sudo usermod -aG docker $USER
 sudo apt install docker-compose-plugin
 
 
-
-cd ~/soti-mcp && sed -i 's|^\( *\)if \[ ! -f "\$SECRET_FILE" \]; then|\1if ! sudo test -f "$SECRET_FILE"; then|' close-c1-c2.sh && grep -c 'sudo test -f' close-c1-c2.sh
-
-sudo cp ~/etc/soti-agent/zetesdemo.secret /etc/soti-agent/zetesdemo.secret && sudo sed -i 's/\r$//' /etc/soti-agent/zetesdemo.secret && sudo chmod 600 /etc/soti-agent/zetesdemo.secret
-
-sudo sh -c 'n=0; for k in SOTI_CLIENT_ID SOTI_CLIENT_SECRET SOTI_USERNAME SOTI_PASSWORD; do v=$(grep -E "^$k=" /etc/soti-agent/zetesdemo.secret | head -n1 | cut -d= -f2-); [ -n "$v" ] && { echo "  $k OK (${#v} chars)"; n=$((n+1)); } || echo "  $k EMPTY"; done; echo "  $n/4 ready"'
-
-./close-c1-c2.sh up && ./close-c1-c2.sh verify
+docker ps --filter label=com.docker.compose.project=soti-zetesdemo --format 'table {{.Names}}\t{{.Status}}'; echo "--- logs ---"; docker logs zetesdemo-mcp --tail 20; echo "--- host 8080 (want nothing) ---"; ss -ltn | grep ':8080' || echo "  nothing published - correct"; echo "--- MCP inside container ---"; docker exec zetesdemo-mcp python -c "
+import json,urllib.request
+b=json.dumps({'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2024-11-05','capabilities':{},'clientInfo':{'name':'v','version':'1'}}}).encode()
+r=urllib.request.Request('http://127.0.0.1:8080/mcp',data=b,method='POST')
+r.add_header('Content-Type','application/json'); r.add_header('Accept','application/json, text/event-stream')
+print(urllib.request.urlopen(r,timeout=10).read().decode()[:220])"
